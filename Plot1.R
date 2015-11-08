@@ -1,0 +1,8 @@
+setwd("D:\\Personal\\ExploratoryDataAnalysis\\Project1\\ExData_Plotting1")
+energy <- read.table("household_power_consumption.txt", sep =";", header = TRUE, na.strings = c("?",""))
+energy$DateNew <- with(energy, as.Date(as.character(Date), "%d/%m/%Y"))
+energyFeb <- subset(energy,DateNew=="2007-02-01" |  DateNew=="2007-02-02")
+energyFeb$DateTime <- with(energyFeb,strptime(paste(DateNew,Time), "%Y-%m-%d %H:%M:%S"))
+png(filename = "Plot1.png", width = 480, height = 480, units = "px", type = "windows")
+hist(energyFeb$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power(kilowatts)", ylab = "Frequency")
+dev.off()
